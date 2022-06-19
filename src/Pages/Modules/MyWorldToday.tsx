@@ -13,7 +13,6 @@ export default function MyWorldToday({ open }: Props) {
       direction="column"
       align="center"
       open={open}
-      // padding="md"
     >
       <Container direction="column" autoPad>
         <H1 align="center">My world today</H1>

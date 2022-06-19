@@ -15,7 +15,6 @@ interface ContainerProps {
   height?: string;
   width?: string;
   wrap?: "wrap" | "nowrap";
-  // padding?:
 }
 
 const Container = styled.div<ContainerProps>(

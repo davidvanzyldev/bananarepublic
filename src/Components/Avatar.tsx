@@ -9,7 +9,6 @@ const AvatarContainer = styled.div(() => {
     width: "100%",
     maxWidth: "200px",
     marginBottom: 50
-    // [mq.sm]: { padding: padding ? padding : autoPad ? theme.layout.md : 0 }
   };
 });
 

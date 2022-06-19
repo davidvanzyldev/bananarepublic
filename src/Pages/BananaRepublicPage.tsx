@@ -5,12 +5,11 @@ import Form from "./Modules/Form";
 
 export default function BananaRepublicPage() {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  let myRef = useRef(null);
-  console.log({ myRef });
+  let scrollRef = useRef(null);
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
-    if (!drawerOpen && myRef !== null) {
-      myRef.current.scrollIntoView({
+    if (!drawerOpen && scrollRef !== null) {
+      scrollRef.current.scrollIntoView({
         behavior: "smooth"
       });
     }
@@ -20,7 +19,7 @@ export default function BananaRepublicPage() {
     <div className="App">
       <PageContainer>
         <Drawer open={drawerOpen} toggleOpen={handleDrawerToggle} />
-        <div ref={myRef} />
+        <div ref={scrollRef} />
         <Form open={drawerOpen} />
       </PageContainer>
     </div>

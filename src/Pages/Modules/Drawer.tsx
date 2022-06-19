@@ -26,7 +26,6 @@ export default function Drawer({ toggleOpen, open }: Props) {
         This is a design that you will need to code up to impress us
       </H2>
       <ArrowButton onClick={toggleOpen} open={open} />
-      {/* <Body>Name</Body> */}
     </Container>
   );
 }
