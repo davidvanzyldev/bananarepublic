@@ -1,3 +1,20 @@
 body {
   margin: 0px;
 }
+input {
+  outline: none !important;
+}
+[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+[type="radio"] + div {
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+/* [type="radio"]:checked + img {
+  outline: 5px solid orange;
+  background-color: pink;
+} */

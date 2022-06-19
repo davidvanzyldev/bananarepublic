@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { mq } from "../Theme/Theme";
 import Face from "../Assets/face.svg";
 
 const AvatarContainer = styled.div(() => {

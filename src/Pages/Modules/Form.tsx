@@ -1,22 +1,27 @@
-import Avatar from "../../Components/Avatar";
-import { Body, H1, H2 } from "../../Components/Text";
 import { Container } from "../../Components/Layout";
-import ArrowButton from "../../Components/ArrowButton";
 import MyWorldToday from "./MyWorldToday";
 import { Formik, Field } from "formik";
 import {
-  TextField,
+  InputField,
   RadioFieldContainer,
   DateField
 } from "../../Components/Inputs";
-import { FormContainer } from "./Form.styles";
+import { FormContainer, MembershipSpacer } from "./Form.styles";
+import { Button, ButtonContainer } from "../../Components/Button";
+import {
+  Card,
+  MarsSymbol,
+  VenusSymbol,
+  CardAlt,
+  MarsSymbolAlt,
+  VenusSymbolAlt
+} from "../../Assets/Icons";
 
 interface Props {
-  toggleOpen: () => void;
   open: boolean;
 }
 
-export default function Form({ toggleOpen, open }: Props) {
+export default function Form({ open }: Props) {
   return (
     <Container
       variant="white"
@@ -34,39 +39,89 @@ export default function Form({ toggleOpen, open }: Props) {
             dob: "",
             telephone: "",
             email: "",
-            customerId: ""
+            customerId: "",
+            membership: ""
           }}
           onSubmit={(values) => {
             console.log("submitted", values);
           }}
         >
-          {({ values, getFieldProps, handleSubmit }) => (
+          {({ values, getFieldProps, handleSubmit, setFieldValue }) => (
             <>
-              <TextField label="Name" name="name" />
-              <RadioFieldContainer label="Gender" name="gender" />
-              <DateField label="Date of Birth" name="dob" />
+              <Field
+                label="Name"
+                name="name"
+                placeholder="Name"
+                as={InputField}
+              />
+              <RadioFieldContainer
+                label="Gender"
+                name="gender"
+                options={[
+                  { option: "male", icon: [MarsSymbol, MarsSymbolAlt] },
+                  { option: "female", icon: [VenusSymbol, VenusSymbolAlt] }
+                ]}
+                selected={values.gender}
+                onChange={(name, option) => setFieldValue(name, option)}
+              />
+              <Field
+                label="Date of Birth"
+                name="dob"
+                placeholder="Date of Birth"
+                as={DateField}
+              />
 
-              <div>
-                Email:
-                <Field type="email" name="email" />
-              </div>
+              <Field
+                label="Email"
+                name="email"
+                placeholder="Email"
+                type="email"
+                as={InputField}
+              />
 
-              <div>
-                Mobile:
-                <Field type="tel" name="telephone" />
-              </div>
+              <Field
+                label="Mobile"
+                name="telephone"
+                type="tel"
+                placeholder="Mobile Number"
+                as={InputField}
+              />
 
-              <TextField label="Customer Id" name="customerId" />
+              <Field
+                label="Customer Id"
+                name="customerId"
+                placeholder="Customer Id"
+                as={InputField}
+              />
 
-              <div>
-                Membership:
-                <Field type="radio" name="membership" value="male" />
-                <Field type="radio" name="membership" value="female" />
-              </div>
+              <MembershipSpacer>
+                <RadioFieldContainer
+                  label="Membership"
+                  name="membership"
+                  // options={["1", "2"]}
+                  options={[
+                    { option: "classic", icon: [Card, CardAlt] },
+                    { option: "silver", icon: [Card, CardAlt] },
+                    { option: "gold", icon: [Card, CardAlt] }
+                  ]}
+                  selected={values.membership}
+                  onChange={(name, option) => setFieldValue(name, option)}
+                />
+              </MembershipSpacer>
 
-              <button type="submit" onClick={handleSubmit}>
-                Submit
-              </button>
+              <ButtonContainer>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    console.log("Cancelled");
+                  }}
+                >
+                  CANCEL
+                </Button>
+                <Button type="submit" onClick={handleSubmit} marginSide="left">
+                  SAVE
+                </Button>
+              </ButtonContainer>
             </>
           )}
         </Formik>

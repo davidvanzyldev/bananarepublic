@@ -1,18 +1,37 @@
-import { Field } from "formik";
 import styled from "@emotion/styled";
 import { Container } from "./Layout";
-import { Body } from "./Text";
-import { mq, VariantType } from "../Theme/Theme";
+import { Body, FormOption } from "./Text";
+import { mq } from "../Theme/Theme";
+import React from "react";
 
-const TextInputStyled = styled.input(({ theme }) => {
+const BaseInput = styled.input(({ theme }) => {
+  return {
+    boxSizing: "border-box",
+    height: 40,
+    borderRadius: 4,
+    borderWidth: 0,
+    backgroundColor: theme.color.form.secondary.background,
+    paddingLeft: 10,
+    "&:focus-visible": {
+      border: `1px solid ${theme.color.form.primary.border}`,
+      backgroundColor: theme.color.form.primary.background
+    },
+    "::placeholder": {
+      color: theme.color.form.primary.border
+    }
+  };
+});
+
+const TextInputStyled = styled(BaseInput)(({ theme }) => {
   return {
     width: "100%"
   };
 });
 
-const DateInputStyled = styled.input(({ theme }) => {
+const DateInputStyled = styled(BaseInput)<{ dirty?: boolean }>(({ theme }) => {
   return {
-    width: "100%"
+    width: "100%",
+    color: theme.color.form.primary.border
   };
 });
 
@@ -35,49 +54,131 @@ const InputContainer = styled.div(({ theme }) => {
 interface TextFieldProps {
   name: string;
   label: string;
+  type?: "text" | "email" | "tel";
+  placeholder?: string;
 }
 
-const TextField = ({ name, label }: TextFieldProps) => {
+const InputField = ({
+  name,
+  label,
+  type = "text",
+  placeholder,
+  ...rest
+}: TextFieldProps) => {
   return (
     <InputContainer>
       <Container flex={2}>
         <Body align="left">{label}</Body>
       </Container>
       <Container flex={5} width="100%">
-        <Field type="text" name={name} component={TextInputStyled} />
+        <TextInputStyled
+          placeholder={placeholder}
+          type={type}
+          name={name}
+          {...rest}
+        />
       </Container>
     </InputContainer>
   );
 };
 
-const DateField = ({ name, label }: TextFieldProps) => {
+const DateField = ({ name, label, placeholder, ...rest }: TextFieldProps) => {
+  console.log(JSON.stringify(rest));
   return (
     <InputContainer>
       <Container flex={2}>
         <Body align="left">{label}</Body>
       </Container>
       <Container flex={5} width="100%">
-        <Field type="date" name={name} component={DateInputStyled} />
+        <DateInputStyled
+          type="date"
+          name={name}
+          placeholder={placeholder}
+          {...rest}
+        />
       </Container>
     </InputContainer>
   );
 };
 
-const RadioFieldContainer = ({ name, label }: TextFieldProps) => {
+const RadioIconContainer = styled(Container)<{ selected: boolean }>(
+  ({ theme, selected }) => {
+    return {
+      marginRight: 10,
+      minWidth: 40,
+      // width: 40,
+      minHeight: 40,
+      fontSize: 30,
+      borderRadius: 20,
+      justifyContent: "center",
+      alignItems: "center",
+
+      backgroundColor: selected
+        ? theme.color.form.secondary.color
+        : theme.color.form.secondary.background,
+      cursor: "pointer"
+    };
+  }
+);
+
+const RadioIcon = styled.img<{ selected: boolean }>(({ theme, selected }) => {
+  return {
+    color: selected
+      ? theme.color.form.secondary.background
+      : theme.color.form.secondary.color
+  };
+});
+
+interface RadioFieldContainerProps extends TextFieldProps {
+  options: { option: string; icon: any }[];
+  onChange: (name: string, option: string) => void;
+  selected: string;
+}
+
+const RadioFieldContainer = ({
+  name,
+  label,
+  options,
+  onChange,
+  selected
+}: RadioFieldContainerProps) => {
   return (
     <>
-      {/* // <Container justify="center" align="center"> */}
       <InputContainer>
         <Container flex={2}>
           <Body align="left">{label}</Body>
         </Container>
-        <Container flex={5} width="100%">
-          <Field type="radio" name="gender" value="male" />
-          <Field type="radio" name="gender" value="female" />
+        <Container flex={5} width="100%" wrap>
+          {options.map(({ option, icon }) => {
+            return (
+              <Container
+                style={{ cursor: "pointer" }}
+                direction="row"
+                justify="center"
+                align="center"
+                key={option}
+                onClick={() => {
+                  console.log({ name, option });
+                  onChange(name, option);
+                }}
+              >
+                <RadioIconContainer selected={option === selected}>
+                  {
+                    <img
+                      alt={option}
+                      src={option === selected ? icon[1] : icon[0]}
+                      width="20"
+                    />
+                  }
+                </RadioIconContainer>
+                <FormOption>{option}</FormOption>
+              </Container>
+            );
+          })}
         </Container>
       </InputContainer>
       {/* // </Container> */}
     </>
   );
 };
-export { TextField, RadioFieldContainer };
+export { TextInputStyled, InputField, RadioFieldContainer, DateField };

@@ -40,12 +40,12 @@ export const theme: Theme = {
   color: {
     // e.g. green button
     primary: {
-      main: "green",
+      main: "#60e6c5",
       contrast: "white"
     },
     // e.g. grey button
     secondary: {
-      main: "gray",
+      main: "#f5f8f9",
       contrast: "black"
     },
 
@@ -55,14 +55,16 @@ export const theme: Theme = {
       orange: "#FFA500"
     },
     form: {
+      // when active
       primary: {
-        background: "",
-        color: "",
-        border: ""
+        background: "fcfcfd",
+        color: "#383838",
+        border: "#cad7dd"
       },
+      // when not focused
       secondary: {
-        background: "",
-        color: "",
+        background: "#f5f8f9",
+        color: "#b1bfcd",
         border: ""
       },
       error: {

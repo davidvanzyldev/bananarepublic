@@ -1,5 +1,5 @@
 import Avatar from "../../Components/Avatar";
-import { Body, H1, H2 } from "../../Components/Text";
+import { H1, H2 } from "../../Components/Text";
 import { Container } from "../../Components/Layout";
 import ArrowButton from "../../Components/ArrowButton";
 
@@ -17,6 +17,7 @@ export default function Drawer({ toggleOpen, open }: Props) {
       direction="column"
       autoPad
       flex={1}
+      // drawer needs to stay above the sliding page
       style={{ zIndex: 100 }}
     >
       <Avatar />

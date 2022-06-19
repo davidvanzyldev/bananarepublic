@@ -14,6 +14,7 @@ interface ContainerProps {
   position?: "static" | "relative" | "absolute";
   height?: string;
   width?: string;
+  wrap?: boolean;
   // padding?:
 }
 
@@ -30,12 +31,14 @@ const Container = styled.div<ContainerProps>(
     flex = 0,
     position = "static",
     height,
-    width
+    width,
+    wrap = false
   }) => {
     const newPadding = theme.layout[padding];
     return {
       height: height,
       width: width,
+      flexWrap: wrap ? "wrap" : "nowrap",
       position,
       display: "flex",
       flex: flex,

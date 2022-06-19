@@ -11,6 +11,12 @@ const ArrowContainer = styled.div<{ open: boolean }>(({ theme, open }) => ({
   justifyContent: "center",
   transform: open ? "rotate(180deg)" : "rotate(0deg)",
   padding: 15,
+  "&:hover": {
+    opacity: 0.9
+  },
+  "&:active": {
+    opacity: 0.5
+  },
   [mq.sm]: { transform: open ? "rotate(90deg)" : "rotate(-90deg)" }
 }));
 

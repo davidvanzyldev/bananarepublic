@@ -7,10 +7,6 @@ interface TextBaselineProps {
   variant?: VariantType;
 }
 
-interface TextProps {
-  // color override if we don't want to use a variant
-}
-
 const TextBaseline = styled.div<TextBaselineProps>(
   ({ theme, align = "left", color, variant = "primary" }) => ({
     fontFamily: theme.typography.global.fontFamily,
@@ -48,4 +44,10 @@ const Body = styled(TextBaseline)(({ theme }) => ({
   [mq.sm]: { fontSize: "12px" }
 }));
 
-export { H1, H2, Body };
+const FormOption = styled(Body)(({ theme }) => ({
+  color: theme.color.form.primary.border,
+  textDecoration: "capitalize",
+  marginRight: 10
+}));
+
+export { H1, H2, Body, FormOption };
