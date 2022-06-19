@@ -16,7 +16,7 @@ const AvatarContainer = styled.div(() => {
 export default function Avatar() {
   return (
     <AvatarContainer>
-      <img src={Face} width="100%" />
+      <img src={Face} width="100%" alt="Profile" />
     </AvatarContainer>
   );
 }

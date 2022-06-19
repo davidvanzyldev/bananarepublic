@@ -83,7 +83,6 @@ const InputField = ({
 };
 
 const DateField = ({ name, label, placeholder, ...rest }: TextFieldProps) => {
-  console.log(JSON.stringify(rest));
   return (
     <InputContainer>
       <Container flex={2}>
@@ -121,14 +120,6 @@ const RadioIconContainer = styled(Container)<{ selected: boolean }>(
   }
 );
 
-const RadioIcon = styled.img<{ selected: boolean }>(({ theme, selected }) => {
-  return {
-    color: selected
-      ? theme.color.form.secondary.background
-      : theme.color.form.secondary.color
-  };
-});
-
 interface RadioFieldContainerProps extends TextFieldProps {
   options: { option: string; icon: any }[];
   onChange: (name: string, option: string) => void;
@@ -148,7 +139,7 @@ const RadioFieldContainer = ({
         <Container flex={2}>
           <Body align="left">{label}</Body>
         </Container>
-        <Container flex={5} width="100%" wrap>
+        <Container flex={5} width="100%" wrap="wrap">
           {options.map(({ option, icon }) => {
             return (
               <Container
@@ -158,7 +149,6 @@ const RadioFieldContainer = ({
                 align="center"
                 key={option}
                 onClick={() => {
-                  console.log({ name, option });
                   onChange(name, option);
                 }}
               >

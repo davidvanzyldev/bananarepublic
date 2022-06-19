@@ -24,7 +24,6 @@ interface Props {
   onClick: () => void;
   open: boolean;
 }
-console.log({ open });
 
 export default function ArrowButton({ onClick, open }: Props) {
   return (

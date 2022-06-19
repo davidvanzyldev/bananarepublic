@@ -46,7 +46,7 @@ export default function Form({ open }: Props) {
             console.log("submitted", values);
           }}
         >
-          {({ values, getFieldProps, handleSubmit, setFieldValue }) => (
+          {({ values, handleSubmit, setFieldValue, handleReset }) => (
             <>
               <Field
                 label="Name"
@@ -110,12 +110,7 @@ export default function Form({ open }: Props) {
               </MembershipSpacer>
 
               <ButtonContainer>
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    console.log("Cancelled");
-                  }}
-                >
+                <Button variant="secondary" onClick={handleReset}>
                   CANCEL
                 </Button>
                 <Button type="submit" onClick={handleSubmit} marginSide="left">
