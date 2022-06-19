@@ -1,2 +1,2 @@
 # bananarepublic
-Created with CodeSandbox
+Experiments with a fully modular approach (like in React Native), but on web
